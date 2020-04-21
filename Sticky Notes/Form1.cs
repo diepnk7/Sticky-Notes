@@ -1,14 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Sticky_Notes
@@ -65,7 +58,7 @@ namespace Sticky_Notes
                 //move cusor to end of text
                 textBox1.SelectionLength = 0;
                 textBox1.SelectionStart = textBox1.Text.Length;
-                
+
             }
             else
             {
@@ -97,17 +90,6 @@ namespace Sticky_Notes
         {
             Show();
             WindowState = FormWindowState.Normal;
-        }
-
-        private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Show();
-            WindowState = FormWindowState.Normal;
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
