@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Sticky_Notes
@@ -41,6 +42,7 @@ namespace Sticky_Notes
         }
         #endregion
 
+        string filePath = @"C:/Notes/Notes.txt";
         private void Form1_Load(object sender, EventArgs e)
         {
             StartWithOS();
@@ -49,16 +51,12 @@ namespace Sticky_Notes
             //don't show in taskbar
             this.ShowInTaskbar = false;
 
-            string filePath = @"C:\Notes\Notes.txt";
-
-            if (File.Exists(filePath))
+            if (File.Exists(filePath) && File.ReadAllText(filePath) != null)
             {
-                //Decrypt
-                textBox1.Text = File.ReadAllText(filePath);
+                textBox1.Text = (File.ReadAllText(filePath)).ToString();
                 //move cusor to end of text
                 textBox1.SelectionLength = 0;
                 textBox1.SelectionStart = textBox1.Text.Length;
-
             }
             else
             {
@@ -80,8 +78,8 @@ namespace Sticky_Notes
 
         private void btnX_Click(object sender, EventArgs e)
         {
-            //Encrypt
-            File.WriteAllText(@"C:\Notes\Notes.txt", textBox1.Text);
+            //Encrypt and Write file
+            File.WriteAllText(Path.GetFileName(filePath),Convert.ToString(textBox1.Text));
 
             Application.Exit();
         }
@@ -94,7 +92,9 @@ namespace Sticky_Notes
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            File.WriteAllText(@"C:\Notes\Notes.txt", textBox1.Text);
+            File.WriteAllText(filePath, textBox1.Text.ToString());
         }
+
+        
     }
 }
