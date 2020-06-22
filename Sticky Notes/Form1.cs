@@ -48,15 +48,15 @@ namespace Sticky_Notes
             StartWithOS();
             //show in top right
             this.Location = new Point(Screen.FromPoint(this.Location).WorkingArea.Right - this.Width, 0);
-            //don't show in taskbar
+
             this.ShowInTaskbar = false;
 
             if (File.Exists(filePath) && File.ReadAllText(filePath) != null)
             {
-                textBox1.Text = (File.ReadAllText(filePath)).ToString();
+                textBox.Text = Convert.ToString(File.ReadAllText(filePath));
                 //move cusor to end of text
-                textBox1.SelectionLength = 0;
-                textBox1.SelectionStart = textBox1.Text.Length;
+                textBox.SelectionLength = 0;
+                textBox.SelectionStart = textBox.Text.Length;
             }
             else
             {
@@ -64,7 +64,7 @@ namespace Sticky_Notes
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox_TextChanged(object sender, EventArgs e)
         {
             timer1.Stop();
             timer1.Start();
@@ -78,8 +78,8 @@ namespace Sticky_Notes
 
         private void btnX_Click(object sender, EventArgs e)
         {
-            //Encrypt and Write file
-            File.WriteAllText(Path.GetFileName(filePath),Convert.ToString(textBox1.Text));
+            //Write file
+            File.WriteAllText(filePath,Convert.ToString(textBox.Text));
 
             Application.Exit();
         }
@@ -92,9 +92,7 @@ namespace Sticky_Notes
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            File.WriteAllText(filePath, textBox1.Text.ToString());
+            File.WriteAllText(filePath, Convert.ToString(textBox.Text));
         }
-
-        
     }
 }
